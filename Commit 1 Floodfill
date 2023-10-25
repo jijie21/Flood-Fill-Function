@@ -40,3 +40,5 @@ new_board = flood_fill(board, '.', '~', 4, 9)
 
 for row in new_board:
     print(row)
+
+// Jackie: Ensure all the rows of the input board are of the same lengths through assert statements.
