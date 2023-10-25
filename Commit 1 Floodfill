@@ -1,0 +1,42 @@
+def flood_fill(input_board, old, new, x, y):
+    """Returns board with old values replaced with new value, and through flood filling starting from the coordinates x, y
+    """
+    rows = len(input_board)
+    cols = len(input_board[0])
+
+    # Helper function to perform flood-fill
+    def flood(x, y):
+        # Check if the current cell is out of bounds or already has the new value
+        if x < 0 or x >= rows or y < 0 or y >= cols or input_board[x][y] != old:
+            return
+
+        # Change the value of the current cell to the new value
+        input_board[x] = input_board[x][:y] + new + input_board[x][y + 1:]
+
+        # Recursively fill the connected cells in all four directions
+        flood(x + 1, y)  # Right
+        flood(x - 1, y)  # Left
+        flood(x, y + 1)  # Down
+        flood(x, y - 1)  # Up
+
+    # Start flood-fill at the specified coordinates (x, y)
+    flood(x, y)
+
+    return input_board
+
+# Example usage:
+board = [
+    "......................",
+    "......##########......",
+    "......#........#......",
+    "......#........#......",
+    "......#........#####..",
+    "....###............#..",
+    "....#............###..",
+    "....##############....",
+]
+
+new_board = flood_fill(board, '.', '~', 4, 9)
+
+for row in new_board:
+    print(row)
